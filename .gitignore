@@ -3,3 +3,8 @@ pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.next
 release.properties
+
+# IntelliJ #
+*.iml
+.idea
+atlassian-ide-plugin.xml
