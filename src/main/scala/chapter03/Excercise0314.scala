@@ -5,7 +5,7 @@ import scala.annotation.tailrec
 /**
  * Created by brodericke on 9/9/14.
  */
-object Excercise0312 {
+object Excercise0314 {
 
   def foldLeft[A,B](as: List[A], z: B)(f: (B, A) => B): B = {
     @tailrec
