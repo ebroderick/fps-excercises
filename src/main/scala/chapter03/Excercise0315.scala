@@ -5,7 +5,7 @@ import scala.annotation.tailrec
 /**
  * Created by brodericke on 9/9/14.
  */
-object Excercise0314 {
+object Excercise0315 {
 
   def foldRight[A,B](as: List[A], z: B)(f: (A, B) => B): B = {
     as match {
@@ -26,8 +26,9 @@ object Excercise0314 {
     loop(as, z)
   }
 
-  def append[A](a1: List[A], a2: List[A]): List[A] = {
-    foldRight(a1, a2)((a, b) => Cons(a, b))
+  def concatLists[A](l: List[List[A]]): List[A] = {
+    //foldLeft(l, List[A]())((b, a) => Excercise0314.append(b, a))
+    foldRight(l, List[A]())((a, b) => Excercise0314.append(a, b))
   }
 
 }
