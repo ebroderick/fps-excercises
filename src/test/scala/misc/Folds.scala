@@ -15,6 +15,14 @@ class Folds extends FunSuite {
         def foldRight[B](z: B)(op: (A, B) ⇒ B): B
 
           Applies a binary operator to all elements of this list and a start value, going right to left.
+
+        def +:(elem: A): List[A]
+
+          [use case] A copy of the list with an element prepended.
+
+        def :+(elem: A): List[A]
+
+          [use case] A copy of this list with an element appended.
     */
 
     val list1 = List(1, 2, 3, 4)
