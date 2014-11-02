@@ -30,5 +30,7 @@ class Folds extends FunSuite {
     assert(list1.foldLeft(List[Int]())((l: List[Int], i: Int) => l :+ i) == List(1, 2, 3, 4))
     assert(list1.foldRight(List[Int]())((i: Int, l: List[Int]) => l :+ i) == List(4, 3, 2, 1))
     assert(list1.foldRight(List[Int]())((i: Int, l: List[Int]) => i +: l) == List(1, 2, 3, 4))
+
+    assert(list1.foldRight(List[Int]())((i: Int, l: List[Int]) => { println(s"checking ${i}"); i +: l }) == List(1, 2, 3, 4))
   }
 }
