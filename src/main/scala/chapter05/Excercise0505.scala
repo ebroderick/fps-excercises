@@ -3,7 +3,7 @@ package chapter05
 /**
  * Created by brodericke on 9/9/14.
  */
-object Excercise0504 {
+object Excercise0505 {
   sealed trait Stream[+A] {
     def toList: List[A] = this match {
       case Empty => Nil
@@ -15,8 +15,11 @@ object Excercise0504 {
       case _ => z
     }
 
-    def forAll(p: A => Boolean): Boolean =
-      foldRight(true)((a, b) => p(a) && b)
+    def takeWhile(p: A => Boolean): Stream[A] =
+      foldRight(Stream.empty[A])((a, b) => {
+        if (p(a)) Stream.cons(a, b)
+        else Stream.empty
+      })
 
   }
   case object Empty extends Stream[Nothing]
