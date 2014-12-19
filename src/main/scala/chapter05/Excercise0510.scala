@@ -3,29 +3,20 @@ package chapter05
 /**
  * Created by brodericke on 9/9/14.
  */
-object Excercise0507 {
+object Excercise0510 {
   sealed trait Stream[+A] {
     def toList: List[A] = this match {
       case Empty => Nil
       case Cons(h, t) => h() :: t().toList
     }
 
-    def foldRight[B](z: => B)(f: (A, => B) => B): B = this match {
-      case Cons(h,t) => f(h(), t().foldRight(z)(f))
-      case _ => z
+    def take(n: Int): Stream[A] = {
+      if (n == 0) Empty
+      else this match {
+        case Empty => Empty
+        case Cons(h, t) => Stream.cons(h(), t().take(n - 1))
+      }
     }
-
-    def map[B](f: A => B): Stream[B] =
-      foldRight(Stream[B]())((a, b) => Stream.cons(f(a), b))
-
-    def filter(f: A => Boolean): Stream[A] =
-      foldRight(Stream[A]())((a, b) => if (f(a)) Stream.cons(a, b) else b)
-
-    def append[B>:A](x: => Stream[B]) =
-      foldRight(x)((a, b) => Stream.cons(a, b))
-
-    def flatMap[B](f: A => Stream[B]): Stream[B] =
-      foldRight(Stream[B]())((a, b) => f(a).foldRight(b)((a2, b2) => Stream.cons(a2, b2)))
 
   }
   case object Empty extends Stream[Nothing]
@@ -40,6 +31,15 @@ object Excercise0507 {
     def empty[A]: Stream[A] = Empty
     def apply[A](as: A*): Stream[A] =
       if (as.isEmpty) empty else cons(as.head, apply(as.tail: _*))
+
+    def fibs: Stream[Int] = {
+      def fibs(iMinus2: Int, iMinus1: Int): Stream[Int] = {
+        val currentNumber = iMinus2 + iMinus1
+        Stream.cons(currentNumber, fibs(iMinus1, currentNumber))
+      }
+
+      Stream.cons(0, Stream.cons(1, fibs(0, 1)))
+    }
   }
 
 }
