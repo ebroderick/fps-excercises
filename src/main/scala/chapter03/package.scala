@@ -37,4 +37,8 @@ package object chapter03 {
       case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
     }
   }
+
+  sealed trait Tree[+A]
+  case class Leaf[A](value: A) extends Tree[A]
+  case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
 }
