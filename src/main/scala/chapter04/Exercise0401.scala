@@ -21,8 +21,12 @@ object Exercise0401 {
 
     def orElse[B >: A](ob: => Option[B]): Option[B] = map(_ => this).getOrElse(ob)
 
-    def filter(f: A => Boolean): Option[A] = map(a => if (f(a)) this else None).getOrElse(None)
+    def filter(f: A => Boolean): Option[A] = flatMap(a => if (f(a)) Some(a) else None)
   }
+
+  def Try[A](a: => A): Option[A] =
+    try Some(a)
+    catch { case e: Exception => None }
 
   case class Some[+A](get: A) extends Option[A]
   case object None extends Option[Nothing]
