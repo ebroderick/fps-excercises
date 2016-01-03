@@ -9,3 +9,5 @@ val x = List(1,2,3,4,5) match {
 }
 
 List.foldRight(List(1,2,3), Nil:List[Int])(Cons(_,_))
+
+
