@@ -15,6 +15,7 @@ object Exercise0324 {
         } else {
           fullSub match {
             case Cons(z, zs) => if (y == z) go(fullSub, l, fullSub, matches = false) else go(fullSub, ys, fullSub, matches = false)
+            case Nil => false
           }
         }
     }

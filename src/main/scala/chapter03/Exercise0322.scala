@@ -10,6 +10,7 @@ object Exercise0322 {
       case Nil => r
       case Cons(h1, t1) => l2 match {
         case Cons(h2, t2) => go(t1, t2, Exercise0314.append(r, Cons(h1 + h2, Nil)))
+        case Nil => Nil
       }
     }
     go(as, bs, Nil: List[Int])

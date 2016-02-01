@@ -1,0 +1,16 @@
+algebra - abstract set of operations along with a set of laws or properties we assume to be
+    true. in mathematical sense, one or more sets, together with a collection of functions
+    operating on objects of these sets, and a set of axioms (statements assumed true from
+    which we can derive other theorems that must also be true). From chp 7, sets are types
+    like Par[A] and List[Par[A]], functions are operations like map2, unit, sequence
+
+memoization - ensures thunk is only evaluated once when forced for the first time. example:
+
+    def cons[A](hd: => A, tl: => Stream[A]): Stream[A] = {
+        lazy val head = hd
+        lazy val tail = tl
+        Cons(() => head, () => tail)
+    }
+
+thunk - unevaluated form of an expression. "force" the thunk to evaluate. ex type: () => A.
+    process of caching the result of a thunk is memoization
