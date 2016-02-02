@@ -75,6 +75,15 @@ object Chapter05 {
       case (Cons(x, xs), Cons(y, ys)) => Some(f(x(), y()), (xs(), ys()))
     }
 
+    def zip[B](s2: Stream[B]): Stream[(A,B)] =
+      zipWith(s2)((_,_))
+
+    @annotation.tailrec
+    final def find(f: A => Boolean): Option[A] = this match {
+      case Empty => None
+      case Cons(h, t) => if (f(h())) Some(h()) else t().find(f)
+    }
+
     def startsWith[B>:A](s: Stream[B]): Boolean = zipAll(s).takeWhile(_._2.isDefined).forAll(t => t._1 == t._2)
 
     def tails(): Stream[Stream[A]] = Stream.unfold(this)(s => s match {
