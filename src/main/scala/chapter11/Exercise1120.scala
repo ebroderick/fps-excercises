@@ -1,5 +1,7 @@
 package chapter11
 
+import language.reflectiveCalls
+
 /**
   * Created by ebroderick on 2/15/16.
   */
